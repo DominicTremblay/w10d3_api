@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import moviesData from './seeds/movies';
 import actorsData from './seeds/actors';
+import castingData from './seeds/casting';
 
 const prisma = new PrismaClient();
 
@@ -13,6 +14,10 @@ async function main() {
 
   await prisma.actor.createMany({
     data: actorsData,
+  });
+
+  await prisma.casting.createMany({
+    data: castingData,
   });
 }
 

@@ -1,7 +1,19 @@
 import prisma from '../db';
 
 export const getAllActors = async (req, res) => {
-  const actors = await prisma.actor.findMany({});
+  const actors = await prisma.actor.findMany({
+    include: {
+      casting: {
+        select: {
+          movie: {
+            select: {
+              title: true,
+            },
+          },
+        },
+      },
+    },
+  });
 
   res.json({ data: actors });
 };
